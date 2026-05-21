@@ -4,13 +4,13 @@
 ![License](https://img.shields.io/badge/License-LGPL--3-blue?style=flat-square)
 ![Category](https://img.shields.io/badge/Category-Accounting-4ECDC4?style=flat-square)
 
-Extend the native Aged Receivable report with Anzer document reference columns for Odoo 19.
+Extend the native Aged Receivable report with Anzer and reference columns for Odoo 19.
 
 This addon customizes the original `account_reports` Aged Receivable report in place. It adds **Anzer ID** and **Anzer Reference** columns to unfolded journal-item rows while preserving the standard report action, menu, aging periods, filters, PDF export, and XLSX export.
 
 ## Highlights
 
-- Adds **Anzer ID** and **Anzer Reference** columns to the native Aged Receivable report.
+- Adds **Anzer ID**, **Anzer Reference**, and **Reference** columns to the native Aged Receivable report.
 - Reuses the original `account.aged.receivable.report.handler`.
 - Reads values from `account.move.anzer_id` and `account.move.vendor_ref`.
 - Leaves partner summary and total lines blank for move-level Anzer fields.

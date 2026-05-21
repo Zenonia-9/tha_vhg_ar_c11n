@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="aged_receivable_report_anzer_id" model="account.report.column">
+        <field name="name">Anzer ID</field>
+        <field name="expression_label">anzer_id</field>
+        <field name="figure_type">string</field>
+        <field name="sequence">21</field>
+        <field name="report_id" ref="account_reports.aged_receivable_report"/>
+    </record>
+
+    <record id="aged_receivable_report_vendor_ref" model="account.report.column">
+        <field name="name">Anzer Reference</field>
+        <field name="expression_label">vendor_ref</field>
+        <field name="figure_type">string</field>
+        <field name="sequence">22</field>
+        <field name="report_id" ref="account_reports.aged_receivable_report"/>
+    </record>
+
+    <record id="aged_receivable_line_anzer_id" model="account.report.expression">
+        <field name="label">anzer_id</field>
+        <field name="engine">custom</field>
+        <field name="formula">_report_custom_engine_aged_receivable</field>
+        <field name="subformula">anzer_id</field>
+        <field name="auditable" eval="False"/>
+        <field name="report_line_id" ref="account_reports.aged_receivable_line"/>
+    </record>
+
+    <record id="aged_receivable_line_vendor_ref" model="account.report.expression">
+        <field name="label">vendor_ref</field>
+        <field name="engine">custom</field>
+        <field name="formula">_report_custom_engine_aged_receivable</field>
+        <field name="subformula">vendor_ref</field>
+        <field name="auditable" eval="False"/>
+        <field name="report_line_id" ref="account_reports.aged_receivable_line"/>
+    </record>
+</odoo>

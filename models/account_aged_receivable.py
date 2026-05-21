@@ -26,16 +26,16 @@ class AccountAgedReceivableReportHandler(models.AbstractModel):
             }
             for aml_id, values in result:
                 move = moves_by_line.get(aml_id)
-                values["anzer_id"] = move.anzer_id if move else None
-                values["vendor_ref"] = move.vendor_ref if move else None
+                values["anzer_id"] = (move.anzer_id or "") if move else ""
+                values["vendor_ref"] = (move.vendor_ref or "") if move else ""
             return result
 
         if isinstance(result, dict):
-            result.setdefault("anzer_id", None)
-            result.setdefault("vendor_ref", None)
+            result.setdefault("anzer_id", "")
+            result.setdefault("vendor_ref", "")
         elif isinstance(result, list):
             for _grouping_key, values in result:
-                values.setdefault("anzer_id", None)
-                values.setdefault("vendor_ref", None)
+                values.setdefault("anzer_id", "")
+                values.setdefault("vendor_ref", "")
 
         return result

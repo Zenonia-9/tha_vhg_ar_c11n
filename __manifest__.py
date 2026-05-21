@@ -8,7 +8,6 @@
     "license": "LGPL-3",
     "depends": [
         "account_reports",
-        "anzer_odoo_integration",
     ],
     "data": [
         "data/aged_receivable.xml",

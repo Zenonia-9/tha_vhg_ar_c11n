@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "THA VHG Aged Receivable Customization",
+    "name": "VHG Aged Receivable Customization",
     "summary": "Adds Anzer columns to the original Aged Receivable report.",
     "version": "19.0.1.0.0",
     "category": "Accounting/Accounting",

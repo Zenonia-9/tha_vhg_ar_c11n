@@ -12,6 +12,11 @@
     "data": [
         "data/aged_receivable.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "tha_vhg_ar_c11n/static/src/components/account_report/filters/filter_vhg_ar_account.xml",
+        ],
+    },
     "installable": True,
     "application": False,
     "auto_install": False,

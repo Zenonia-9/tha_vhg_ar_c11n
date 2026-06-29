@@ -6,6 +6,11 @@ from odoo import models
 class AccountAgedReceivableReportHandler(models.AbstractModel):
     _inherit = "account.aged.receivable.report.handler"
 
+    @staticmethod
+    def _set_line_total(values):
+        period_keys = [key for key in values if key.startswith("period")]
+        values["total"] = sum(values[key] for key in period_keys)
+
     def _aged_partner_report_custom_engine_common(self, options, internal_type, current_groupby, next_groupby, offset=0, limit=None):
         result = super()._aged_partner_report_custom_engine_common(
             options,
@@ -31,6 +36,7 @@ class AccountAgedReceivableReportHandler(models.AbstractModel):
                 values["vendor_ref"] = (move.vendor_ref or "") if move else ""
                 values["invoice_no"] = (move.name or "") if move else ""
                 values["ref"] = line.ref or ""
+                self._set_line_total(values)
             return result
 
         if isinstance(result, dict):

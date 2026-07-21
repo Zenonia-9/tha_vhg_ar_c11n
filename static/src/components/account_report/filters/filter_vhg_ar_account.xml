@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
-    <t t-name="tha_vhg_ar_c11n.AccountReportFilterVHGAgedReceivableAccount" t-inherit="account_reports.AccountReportFiltersCustomizable" t-inherit-mode="extension">
+    <t t-name="tha_vhg_ar_c11n.AccountReportFilterVHGAgedReceivableAccount" t-inherit="account_reports.AgedPartnerBalanceFilters" t-inherit-mode="extension">
         <xpath expr="//div[@id='filter_partner']" position="after">
             <t t-if="'vhg_ar_account_filter' in controller.cachedFilterOptions">
                 <div id="filter_vhg_ar_account" class="filter_vhg_account">

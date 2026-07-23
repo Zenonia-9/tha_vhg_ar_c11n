@@ -54,6 +54,8 @@ class AccountAgedReceivableReportHandler(models.AbstractModel):
                 values["anzer_id"] = (move.anzer_id or "") if move else ""
                 values["vendor_ref"] = (move.vendor_ref or "") if move else ""
                 values["invoice_no"] = (move.name or "") if move else ""
+                # Journal entries have no invoice date; use their accounting date instead.
+                values["invoice_date"] = (move.invoice_date or move.date) if move else None
                 values["ref"] = line.ref or ""
                 self._set_line_total(values)
             return result

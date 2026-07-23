@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="account_reports.aged_receivable_report_invoice_date" model="account.report.column">
+        <field name="name">Date</field>
+    </record>
+
     <record id="aged_receivable_report_anzer_id" model="account.report.column">
         <field name="name">Anzer ID</field>
         <field name="expression_label">anzer_id</field>

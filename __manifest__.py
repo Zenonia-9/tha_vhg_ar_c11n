@@ -2,7 +2,7 @@
 {
     "name": "VHG Aged Receivable Customization",
     "summary": "Adds Anzer columns to the original Aged Receivable report.",
-    "version": "19.0.1.0.1",
+    "version": "19.0.1.0.2",
     "category": "Accounting/Accounting",
     "author": "Thein Htoo Aung",
     "license": "LGPL-3",

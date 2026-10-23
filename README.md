@@ -29,6 +29,11 @@ This addon customizes the original `account_reports` Aged Receivable report in p
   builder, avoiding repeated expression dictionaries and carryover checks per
   cell. Keeps foreign-currency metadata and delegates customized expressions,
   carryovers and account grouping to the full native path. Other reports are unchanged.
+- `static/src/components/account_report/export_context.js`
+  Uses the report action context for aged-receivable actions while report data is
+  loading. Odoo clears the data after a slow load but leaves XLSX/PDF buttons
+  active; reading the native context getter then raises a client-side TypeError.
+  Loaded reports retain the native context getter.
 
 ## Module Layout
 
@@ -80,6 +85,30 @@ tha_vhg_ar_c11n/
   These local synthetic timings are not a production latency guarantee.
 - The small original THA sample (32 lines) is not representative of live volume.
   Production latency, query plans and browser performance remain unverified.
+
+## Export during loading (2026-10-23)
+
+- Version `19.0.1.0.3` fixes the live-tab error
+  `Cannot read properties of undefined (reading 'context')` when clicking XLSX
+  while the report shows Loading. This occurs before the export RPC; it is
+  separate from server-side workbook generation. Before this patch, current
+  THA code already generated an 8,712-byte unfolded XLSX successfully.
+- Three frontend regression checks run the actual Odoo report controller and
+  patch utility with service stubs. The original controller reproduces both
+  loading-context failures; the patched controller passes all checks, including
+  export dispatch and preservation of the loaded report context.
+- Repeat the frontend checks from this addon folder:
+  `node --experimental-vm-modules tests/run_frontend_export_tests.mjs`.
+  These checks do not replace full browser integration testing.
+- THA upgrade tests: all four backend tests passed. The full export test creates
+  a posted test invoice and exercises native action dispatch and XLSX generation
+  with folded/unfolded lines and currency columns hidden/shown. All four cases
+  match native workbook cell values, types and number formats; unfolded exports
+  contain the invoice number, Anzer ID/reference and amount. Fixtures roll back.
+- Python/XML syntax, manifest asset paths and Odoo JavaScript transpilation passed.
+- After deployment, upgrade the addon and refresh the browser to load the new
+  JavaScript asset. Successful deployment and browser export on the live server
+  must still be verified.
 
 ## License
 

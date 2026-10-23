@@ -14,6 +14,8 @@ This addon customizes the original `account_reports` Aged Receivable report in p
 - Reuses the original `account.aged.receivable.report.handler`.
 - Reads values from `account.move.anzer_id`, `account.move.vendor_ref`, and `account.move.name`.
 - Leaves partner summary and total lines blank for move-level Anzer fields.
+- Supplies blank custom fields to the native Unfold All batch summaries, preventing
+  missing-key errors while retaining invoice-level details and aging totals.
 - Avoids cloning the full report definition.
 
 ## Technical Notes
@@ -42,6 +44,16 @@ tha_vhg_ar_c11n/
 1. Place the module in your custom addons path.
 2. Update the Apps list in Odoo.
 3. Install **VHG Aged Receivable Customization**.
+
+## Unfold All regression validation (2026-10-23)
+
+- Version `19.0.1.0.1` upgraded on local `THA`; focused Odoo test passed.
+- With the original native partner defaults restored temporarily in a read-only
+  shell check, the report reproduced `KeyError('anzer_id')`.
+- With the fix active, THUKHA's report as of 2026-10-23 returned 32 lines,
+  including 22 journal items; all 10 collapsed summary/total rows matched.
+- Python/XML syntax and manifest checks passed; local Odoo restarted successfully.
+- Deployment and successful browser verification on `10.100.10.61` remain pending.
 
 ## License
 

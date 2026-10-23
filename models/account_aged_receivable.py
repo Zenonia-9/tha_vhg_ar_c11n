@@ -6,6 +6,12 @@ from odoo import models
 class AccountAgedReceivableReportHandler(models.AbstractModel):
     _inherit = "account.aged.receivable.report.handler"
 
+    def _prepare_partner_values(self):
+        values = super()._prepare_partner_values()
+        # Unfold All builds partner summaries without calling the custom engine.
+        values.update(anzer_id="", vendor_ref="", invoice_no="", ref="")
+        return values
+
     def _custom_options_initializer(self, report, options, previous_options):
         super()._custom_options_initializer(report, options, previous_options=previous_options)
 
